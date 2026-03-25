@@ -1,0 +1,1429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Likhita's 21 Days of Birthday Magic 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Quicksand:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #87A96B;
+    --sage-light: #B2C89A;
+    --sage-dark: #6A8C52;
+    --cream: #F5F2E8;
+    --cream-dark: #EDE8D5;
+    --brown: #5D4037;
+    --brown-light: #8D6E63;
+    --warm-white: #FDFAF3;
+    --shadow-soft: 0 8px 32px rgba(93, 64, 55, 0.12);
+    --shadow-card: 0 4px 20px rgba(93, 64, 55, 0.10);
+    --shadow-hover: 0 12px 40px rgba(93, 64, 55, 0.2);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Quicksand', sans-serif;
+    background-color: var(--cream);
+    color: var(--brown);
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  /* Paper texture overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Floating leaf decorations */
+  .leaf {
+    position: fixed;
+    font-size: 1.4rem;
+    opacity: 0.18;
+    pointer-events: none;
+    z-index: 0;
+    animation: floatLeaf 8s ease-in-out infinite;
+  }
+  .leaf:nth-child(1) { top: 8%; left: 3%; animation-delay: 0s; font-size: 1.8rem; }
+  .leaf:nth-child(2) { top: 20%; right: 4%; animation-delay: 1.5s; }
+  .leaf:nth-child(3) { top: 55%; left: 1.5%; animation-delay: 3s; font-size: 1.1rem; }
+  .leaf:nth-child(4) { top: 75%; right: 2%; animation-delay: 2s; font-size: 1.6rem; }
+  .leaf:nth-child(5) { top: 40%; right: 1%; animation-delay: 4.5s; font-size: 1rem; }
+  .leaf:nth-child(6) { bottom: 10%; left: 4%; animation-delay: 1s; }
+
+  @keyframes floatLeaf {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    33% { transform: translateY(-14px) rotate(8deg); }
+    66% { transform: translateY(8px) rotate(-5deg); }
+  }
+
+  /* ── HEADER ── */
+  .header {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 52px 24px 28px;
+  }
+
+  .header-badge {
+    display: inline-block;
+    background: var(--sage);
+    color: var(--warm-white);
+    font-family: 'Quicksand', sans-serif;
+    font-weight: 600;
+    font-size: 0.72rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 5px 16px;
+    border-radius: 50px;
+    margin-bottom: 14px;
+    box-shadow: 0 2px 8px rgba(135,169,107,0.35);
+  }
+
+  .header h1 {
+    font-family: 'Indie Flower', cursive;
+    font-size: clamp(2.4rem, 6vw, 4rem);
+    color: var(--brown);
+    line-height: 1.15;
+    text-shadow: 2px 3px 0px rgba(255,255,255,0.6);
+    margin-bottom: 8px;
+  }
+
+  .header h1 .accent { color: var(--sage-dark); }
+
+  .header-sub {
+    font-size: 0.95rem;
+    color: var(--brown-light);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  .header-divider {
+    margin: 20px auto 0;
+    width: 80px;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, var(--sage-light), transparent);
+    border-radius: 2px;
+  }
+
+  /* ── PROGRESS BAR ── */
+  .progress-section {
+    position: relative;
+    z-index: 1;
+    max-width: 640px;
+    margin: 28px auto 0;
+    padding: 0 24px;
+  }
+
+  .progress-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--brown-light);
+    margin-bottom: 8px;
+  }
+
+  .progress-label .days-count {
+    font-family: 'Indie Flower', cursive;
+    font-size: 1rem;
+    color: var(--sage-dark);
+  }
+
+  .progress-track {
+    background: var(--cream-dark);
+    border-radius: 50px;
+    height: 14px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 6px rgba(93,64,55,0.12);
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--sage-light), var(--sage-dark));
+    border-radius: 50px;
+    transition: width 0.7s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    min-width: 0;
+  }
+
+  .progress-fill::after {
+    content: '🌸';
+    position: absolute;
+    right: -4px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1rem;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.15));
+  }
+
+  /* ── GRID ── */
+  .grid-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1100px;
+    margin: 40px auto 60px;
+    padding: 0 24px;
+  }
+
+  .advent-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 22px;
+  }
+
+  /* ── CARD ── */
+  .card {
+    background: var(--warm-white);
+    border-radius: 22px;
+    box-shadow: var(--shadow-card);
+    cursor: pointer;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+    position: relative;
+    overflow: hidden;
+    border: 2px solid transparent;
+    aspect-ratio: 0.85;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.6) 0%, transparent 60%);
+    border-radius: 20px;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  .card:hover {
+    transform: translateY(-6px) rotate(0.5deg);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--sage-light);
+  }
+
+  .card.logged {
+    border-color: var(--sage);
+    background: linear-gradient(160deg, #f0f5ea, var(--warm-white));
+  }
+
+  .card.today {
+    border-color: var(--sage-dark);
+    box-shadow: 0 0 0 3px rgba(135,169,107,0.25), var(--shadow-hover);
+    animation: todayPulse 3s ease-in-out infinite;
+  }
+
+  @keyframes todayPulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(135,169,107,0.25), var(--shadow-hover); }
+    50% { box-shadow: 0 0 0 6px rgba(135,169,107,0.12), var(--shadow-hover); }
+  }
+
+  .card.future {
+    opacity: 0.72;
+    cursor: default;
+    background: linear-gradient(160deg, #f7f5ee, var(--warm-white));
+  }
+
+  .card.future:hover {
+    transform: translateY(-2px) rotate(0deg);
+    box-shadow: var(--shadow-card);
+    border-color: transparent;
+  }
+
+  /* Photo preview inside card */
+  .card-photo {
+    width: 100%;
+    flex: 1;
+    object-fit: cover;
+    display: block;
+    border-radius: 18px 18px 0 0;
+  }
+
+  .card-body {
+    padding: 10px 12px 12px;
+    flex-shrink: 0;
+  }
+
+  /* No photo state */
+  .card-icon-area {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .card-icon {
+    font-size: 2.2rem;
+    display: block;
+    animation: floatIcon 3.5s ease-in-out infinite;
+  }
+
+  @keyframes floatIcon {
+    0%, 100% { transform: translateY(0) scale(1); }
+    50% { transform: translateY(-6px) scale(1.04); }
+  }
+
+  /* Stagger animations per card */
+  .card:nth-child(1) .card-icon { animation-delay: 0s; }
+  .card:nth-child(2) .card-icon { animation-delay: 0.15s; }
+  .card:nth-child(3) .card-icon { animation-delay: 0.3s; }
+  .card:nth-child(4) .card-icon { animation-delay: 0.45s; }
+  .card:nth-child(5) .card-icon { animation-delay: 0.6s; }
+  .card:nth-child(6) .card-icon { animation-delay: 0.75s; }
+  .card:nth-child(7) .card-icon { animation-delay: 0.9s; }
+  .card:nth-child(8) .card-icon { animation-delay: 1.05s; }
+  .card:nth-child(9) .card-icon { animation-delay: 1.2s; }
+  .card:nth-child(10) .card-icon { animation-delay: 1.35s; }
+  .card:nth-child(11) .card-icon { animation-delay: 0.1s; }
+  .card:nth-child(12) .card-icon { animation-delay: 0.25s; }
+  .card:nth-child(13) .card-icon { animation-delay: 0.4s; }
+  .card:nth-child(14) .card-icon { animation-delay: 0.55s; }
+  .card:nth-child(15) .card-icon { animation-delay: 0.7s; }
+  .card:nth-child(16) .card-icon { animation-delay: 0.85s; }
+  .card:nth-child(17) .card-icon { animation-delay: 1.0s; }
+  .card:nth-child(18) .card-icon { animation-delay: 1.15s; }
+  .card:nth-child(19) .card-icon { animation-delay: 1.3s; }
+  .card:nth-child(20) .card-icon { animation-delay: 1.45s; }
+  .card:nth-child(21) .card-icon { animation-delay: 0.2s; }
+
+  .card-day-num {
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.05rem;
+    color: var(--brown);
+    font-weight: 700;
+    display: block;
+    text-align: center;
+  }
+
+  .card-date-str {
+    font-size: 0.68rem;
+    font-weight: 600;
+    color: var(--brown-light);
+    text-align: center;
+    display: block;
+    letter-spacing: 0.03em;
+  }
+
+  .card-log-preview {
+    font-size: 0.65rem;
+    color: var(--sage-dark);
+    font-weight: 600;
+    margin-top: 3px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .today-badge {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: var(--sage-dark);
+    color: var(--warm-white);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 50px;
+    z-index: 2;
+  }
+
+  .logged-badge {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    background: var(--sage);
+    color: var(--warm-white);
+    font-size: 0.9rem;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    box-shadow: 0 2px 6px rgba(135,169,107,0.4);
+  }
+
+  /* ── MODAL OVERLAY ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(93, 64, 55, 0.35);
+    backdrop-filter: blur(6px);
+    z-index: 100;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+  }
+
+  .modal-overlay.active {
+    display: flex;
+    animation: fadeIn 0.2s ease;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  .modal {
+    background: var(--warm-white);
+    border-radius: 28px;
+    box-shadow: 0 24px 80px rgba(93, 64, 55, 0.25);
+    max-width: 520px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: slideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    position: relative;
+    scrollbar-width: thin;
+    scrollbar-color: var(--sage-light) transparent;
+  }
+
+  @keyframes slideUp {
+    from { transform: translateY(30px) scale(0.96); opacity: 0; }
+    to { transform: translateY(0) scale(1); opacity: 1; }
+  }
+
+  /* Future modal */
+  .modal.future-modal {
+    text-align: center;
+    padding: 48px 36px;
+  }
+
+  .future-modal .future-icon {
+    font-size: 3.5rem;
+    display: block;
+    margin-bottom: 16px;
+    animation: floatIcon 3s ease-in-out infinite;
+  }
+
+  .future-modal h2 {
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.8rem;
+    color: var(--brown);
+    margin-bottom: 8px;
+  }
+
+  .future-modal p {
+    color: var(--brown-light);
+    font-size: 0.92rem;
+    font-weight: 500;
+    line-height: 1.6;
+  }
+
+  .future-modal .countdown {
+    margin-top: 20px;
+    background: var(--cream-dark);
+    border-radius: 16px;
+    padding: 14px 20px;
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.05rem;
+    color: var(--sage-dark);
+  }
+
+  /* Active modal */
+  .modal-header {
+    padding: 28px 28px 0;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .modal-title-group {}
+
+  .modal-day-label {
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.6rem;
+    color: var(--brown);
+    line-height: 1.2;
+  }
+
+  .modal-date-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--sage-dark);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-top: 2px;
+  }
+
+  .modal-close {
+    background: var(--cream-dark);
+    border: none;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    color: var(--brown-light);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, color 0.2s;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .modal-close:hover { background: var(--sage-light); color: var(--brown); }
+
+  .modal-body {
+    padding: 20px 28px 28px;
+  }
+
+  /* Photo upload area */
+  .photo-area {
+    margin-bottom: 20px;
+  }
+
+  .photo-area label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--brown-light);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .photo-preview-wrap {
+    position: relative;
+    border-radius: 18px;
+    overflow: hidden;
+    background: var(--cream-dark);
+    aspect-ratio: 4/3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed var(--sage-light);
+    transition: border-color 0.2s;
+    cursor: pointer;
+  }
+
+  .photo-preview-wrap:hover { border-color: var(--sage); }
+
+  .photo-preview-wrap img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    position: absolute;
+    inset: 0;
+  }
+
+  .photo-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: var(--brown-light);
+    pointer-events: none;
+  }
+
+  .photo-placeholder span:first-child { font-size: 2rem; }
+  .photo-placeholder span:last-child { font-size: 0.82rem; font-weight: 600; }
+
+  .photo-input { display: none; }
+
+  .photo-remove-btn {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(93,64,55,0.7);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    font-size: 0.75rem;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+  }
+
+  .photo-preview-wrap.has-photo .photo-remove-btn { display: flex; }
+  .photo-preview-wrap.has-photo .photo-placeholder { display: none; }
+
+  /* Log textarea */
+  .log-area {
+    margin-bottom: 20px;
+  }
+
+  .log-area label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--brown-light);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .log-textarea {
+    width: 100%;
+    background: var(--cream-dark);
+    border: 2px solid transparent;
+    border-radius: 16px;
+    padding: 14px 16px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--brown);
+    resize: none;
+    min-height: 110px;
+    outline: none;
+    transition: border-color 0.2s;
+    line-height: 1.6;
+  }
+
+  .log-textarea::placeholder { color: #b5a898; }
+  .log-textarea:focus { border-color: var(--sage); }
+
+  /* Gift label input */
+  .gift-label-area {
+    margin-bottom: 20px;
+  }
+
+  .gift-label-area label {
+    display: block;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--brown-light);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .gift-label-input {
+    width: 100%;
+    background: var(--cream-dark);
+    border: 2px solid transparent;
+    border-radius: 12px;
+    padding: 12px 16px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 500;
+    color: var(--brown);
+    outline: none;
+    transition: border-color 0.2s;
+  }
+
+  .gift-label-input::placeholder { color: #b5a898; }
+  .gift-label-input:focus { border-color: var(--sage); }
+
+  /* Save button */
+  .save-btn {
+    width: 100%;
+    background: linear-gradient(135deg, var(--sage), var(--sage-dark));
+    color: var(--warm-white);
+    border: none;
+    border-radius: 16px;
+    padding: 15px 24px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 16px rgba(135,169,107,0.4);
+  }
+
+  .save-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(135,169,107,0.5);
+  }
+
+  .save-btn:active { transform: translateY(0); }
+
+  /* Clear entry link */
+  .clear-entry {
+    display: block;
+    text-align: center;
+    margin-top: 12px;
+    font-size: 0.78rem;
+    color: var(--brown-light);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 600;
+  }
+
+  .clear-entry:hover { color: #c0392b; }
+
+  /* Toast */
+  .toast {
+    position: fixed;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: var(--brown);
+    color: var(--warm-white);
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    box-shadow: 0 8px 24px rgba(93,64,55,0.35);
+    z-index: 200;
+    opacity: 0;
+    transition: opacity 0.3s, transform 0.3s;
+    pointer-events: none;
+    white-space: nowrap;
+  }
+
+  .toast.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  /* Footer */
+  .footer {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    padding: 20px 24px 40px;
+    font-size: 0.78rem;
+    color: var(--brown-light);
+    font-weight: 500;
+  }
+
+  .footer span { color: var(--sage-dark); }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    .advent-grid {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+    }
+    .modal { border-radius: 22px; }
+    .modal-body { padding: 16px 20px 24px; }
+    .modal-header { padding: 22px 20px 0; }
+  }
+
+  @media (max-width: 380px) {
+    .advent-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  /* ── BIRTHDAY SPECIAL ── */
+  .card.birthday {
+    border-color: #d4a0c0 !important;
+    background: linear-gradient(160deg, #fff0f8, var(--warm-white)) !important;
+    box-shadow: 0 0 0 3px rgba(212,160,192,0.3), var(--shadow-hover) !important;
+    animation: birthdayPulse 3s ease-in-out infinite !important;
+  }
+
+  @keyframes birthdayPulse {
+    0%, 100% { box-shadow: 0 0 0 3px rgba(212,160,192,0.25), var(--shadow-hover); }
+    50%       { box-shadow: 0 0 0 7px rgba(212,160,192,0.1), var(--shadow-hover); }
+  }
+
+  .birthday-crown {
+    position: absolute;
+    top: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1.4rem;
+    z-index: 3;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+    animation: crownBob 2s ease-in-out infinite;
+  }
+
+  @keyframes crownBob {
+    0%, 100% { transform: translateX(-50%) translateY(0) rotate(-5deg); }
+    50%       { transform: translateX(-50%) translateY(-5px) rotate(5deg); }
+  }
+
+  .card.birthday .card-day-num  { color: #c06090; }
+  .card.birthday .card-date-str { color: #c06090; font-weight: 700; }
+
+  /* Birthday modal */
+  .modal.birthday-modal { border: 2px solid rgba(212,160,192,0.5); }
+
+  .birthday-banner {
+    background: linear-gradient(135deg, #fce8f3, #f0e8fa, #e8f3fc);
+    border-radius: 18px;
+    padding: 20px 18px;
+    text-align: center;
+    margin-bottom: 20px;
+    border: 1.5px solid rgba(212,160,192,0.4);
+  }
+
+  .birthday-banner-emojis {
+    font-size: 1.1rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 10px;
+  }
+
+  .birthday-banner-text {
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.5rem;
+    color: #a0507a;
+    margin-bottom: 6px;
+    line-height: 1.3;
+  }
+
+  .birthday-banner-sub {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #b06090;
+    line-height: 1.5;
+  }
+
+  /* ── MULTI-ENTRY UI ── */
+
+  .no-entries-msg {
+    text-align: center;
+    padding: 22px 16px;
+    font-family: 'Indie Flower', cursive;
+    font-size: 1.05rem;
+    color: var(--brown-light);
+    background: var(--cream-dark);
+    border-radius: 16px;
+    margin-bottom: 16px;
+    line-height: 1.7;
+  }
+  .no-entries-msg span { font-family: 'Quicksand', sans-serif; font-size: 0.82rem; }
+
+  .entries-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+  }
+
+  .entry-card {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--cream-dark);
+    border-radius: 16px;
+    padding: 10px 12px;
+    border: 2px solid transparent;
+    transition: border-color 0.2s;
+  }
+  .entry-card:hover { border-color: var(--sage-light); }
+
+  .entry-thumb {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .entry-thumb-placeholder {
+    width: 52px;
+    height: 52px;
+    border-radius: 10px;
+    background: var(--cream);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+  }
+
+  .entry-card-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .entry-card-label {
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--brown);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .entry-card-log {
+    font-size: 0.78rem;
+    color: var(--brown-light);
+    margin-top: 2px;
+    line-height: 1.4;
+  }
+
+  .entry-card-ts {
+    font-size: 0.68rem;
+    color: #b5a898;
+    margin-top: 3px;
+  }
+
+  .entry-card-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    flex-shrink: 0;
+  }
+
+  .entry-edit-btn, .entry-del-btn {
+    background: var(--cream);
+    border: none;
+    border-radius: 8px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.15s;
+  }
+  .entry-edit-btn:hover { background: var(--sage-light); }
+  .entry-del-btn:hover  { background: #fde0e0; }
+
+  .add-entry-divider {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 4px 0 16px;
+    color: var(--sage-dark);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .add-entry-divider::before,
+  .add-entry-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--sage-light);
+    opacity: 0.5;
+  }
+
+  .entry-form {
+    animation: slideUp 0.25s cubic-bezier(0.34,1.56,0.64,1);
+  }
+
+  .form-actions-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .form-actions-row .save-btn { flex: 1; }
+
+  .cancel-edit-btn {
+    background: var(--cream-dark);
+    border: none;
+    border-radius: 12px;
+    padding: 14px 18px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--brown-light);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background 0.2s;
+  }
+  .cancel-edit-btn:hover { background: #e8e0d0; }
+
+  /* Scrollbar */
+  .modal::-webkit-scrollbar { width: 6px; }
+  .modal::-webkit-scrollbar-track { background: transparent; }
+  .modal::-webkit-scrollbar-thumb { background: var(--sage-light); border-radius: 10px; }
+</style>
+</head>
+<body>
+
+<!-- Floating leaves -->
+<div class="leaf">🌸</div>
+<div class="leaf">🦋</div>
+<div class="leaf">🌷</div>
+<div class="leaf">✨</div>
+<div class="leaf">🍓</div>
+<div class="leaf">🌼</div>
+
+<!-- Header -->
+<header class="header">
+  <div class="header-badge">🎀 My Birthday Countdown 🎀</div>
+  <h1>21 Days of<br><span class="accent">Likhita's Magic</span> 🌸</h1>
+  <p class="header-sub">A little birthday universe, just for me. ✨ · March 21 – <span style="color:var(--sage-dark);font-weight:700;">April 10 🎂</span></p>
+  <div class="header-divider"></div>
+</header>
+
+<!-- Progress Bar -->
+<div class="progress-section">
+  <div class="progress-label">
+    <span>Days Logged</span>
+    <span class="days-count" id="progressText">0 / 21</span>
+  </div>
+  <div class="progress-track">
+    <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+  </div>
+</div>
+
+<!-- Grid -->
+<div class="grid-wrapper">
+  <div class="advent-grid" id="adventGrid"></div>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+  Forever grateful for making my 21st birthday something I would never forget 🌸
+</footer>
+
+<!-- Modal Overlay -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal" id="modal"></div>
+</div>
+
+<!-- Toast -->
+<div class="toast" id="toast"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // ── CONFIG ──
+  const START_DATE = new Date('2026-03-21T00:00:00');
+  const TODAY = new Date('2026-03-26T00:00:00');
+  const TOTAL_DAYS = 21;
+  const BIRTHDAY_INDEX = 20; // April 10 = Day 21 (index 20)
+  const ICONS = ['🎀','🍰','🌸','🧸','🍓','🌷','🎂','🫧','🌻','🍩','🎠','🧁','🫶🏼','🍑','🌈','🐣','🫐','🌙','🍬','🦋','🎂'];
+
+  // ── SUPABASE INIT ──
+  const supabaseUrl = 'https://mrkpcggzgpkihacsjwri.supabase.co';
+  const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im1ya3BjZ2d6Z3BraWhhY3Nqd3JpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ0NTgzNTcsImV4cCI6MjA5MDAzNDM1N30.tMrzvl4Hyesoj9u3PphQLt1H09V2jyzib58MQCVd5FE';
+  const supabase = window.supabase.createClient(supabaseUrl, supabaseKey);
+
+  // ── STORE: each day holds an array of entries ──
+  // entry = { id, label, log, photo, ts }
+  let _localStore = {};
+  
+  async function initApp() {
+    const { data, error } = await supabase.from('entries').select('*');
+    if (!error && data) {
+      _localStore = {};
+      data.forEach(row => {
+        if (!_localStore[row.day_index]) _localStore[row.day_index] = [];
+        _localStore[row.day_index].push({
+          id: row.id, label: row.label, log: row.log, photo: row.photo_url, ts: row.ts
+        });
+      });
+    }
+    renderGrid();
+  }
+
+  function getStore() {
+    return _localStore;
+  }
+  function saveStore(data) {
+    _localStore = data;
+    // We update local cache directly for UI sync, cloud save happens async
+  }
+  function getDayEntries(dayIndex) {
+    return _localStore[dayIndex] || [];
+  }
+  function uid() {
+    return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+  }
+
+  // ── DATE HELPERS ──
+  function getDateForDay(i) {
+    const d = new Date(START_DATE);
+    d.setDate(d.getDate() + i);
+    return d;
+  }
+  function formatDate(d) {
+    return d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+  }
+  function isFuture(i) { return getDateForDay(i) > TODAY; }
+  function isToday(i)  { return getDateForDay(i).toDateString() === TODAY.toDateString(); }
+  function daysUntil(i){ return Math.ceil((getDateForDay(i) - TODAY) / 86400000); }
+  function escapeHtml(s) {
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  // ── RENDER GRID ──
+  function renderGrid() {
+    const store = getStore();
+    const grid = document.getElementById('adventGrid');
+    grid.innerHTML = '';
+    let logged = 0;
+
+    for (let i = 0; i < TOTAL_DAYS; i++) {
+      const entries = store[i] || [];
+      const future  = isFuture(i);
+      const today   = isToday(i);
+      const hasLog  = entries.length > 0;
+      if (hasLog) logged++;
+
+      const isBirthday = (i === BIRTHDAY_INDEX);
+      const card = document.createElement('div');
+      card.className = 'card' + (future ? ' future' : '') + (today ? ' today' : '') + (hasLog ? ' logged' : '') + (isBirthday ? ' birthday' : '');
+
+      const date    = getDateForDay(i);
+      const dateStr = formatDate(date);
+      const firstPhoto = entries.find(e => e.photo)?.photo || '';
+      const count   = entries.length;
+
+      let html = '';
+      if (today)       html += `<div class="today-badge">Today 🌸</div>`;
+      if (isBirthday)  html += `<div class="birthday-crown">👑</div>`;
+      if (hasLog)      html += `<div class="logged-badge">${count > 1 ? count : '✓'}</div>`;
+
+      if (firstPhoto) {
+        html += `<img class="card-photo" src="${firstPhoto}" alt="Day ${i+1}">`;
+      } else {
+        html += `<div class="card-icon-area"><span class="card-icon">${ICONS[i]}</span></div>`;
+      }
+
+      html += `<div class="card-body">`;
+      html += `<span class="card-day-num">${isBirthday ? '🎂 Day 21' : 'Day ' + (i + 1)}</span>`;
+      html += `<span class="card-date-str">${isBirthday ? 'The Big Day! 🎉' : dateStr}</span>`;
+      if (entries.length > 0) {
+        const first = entries[0];
+        const preview = first.label || (first.log ? first.log.substring(0, 26) + (first.log.length > 26 ? '…' : '') : '');
+        if (preview) html += `<div class="card-log-preview">${escapeHtml(preview)}</div>`;
+      }
+      html += `</div>`;
+
+      card.innerHTML = html;
+      card.addEventListener('click', () => future ? openFutureModal(i) : openModal(i));
+      grid.appendChild(card);
+    }
+
+    document.getElementById('progressText').textContent = `${logged} / ${TOTAL_DAYS}`;
+    document.getElementById('progressFill').style.width = ((logged / TOTAL_DAYS) * 100) + '%';
+  }
+
+  // ── CURRENT EDITING STATE ──
+  let _currentDay = null;
+  let _editingId  = null; // null = new entry
+  let _pendingPhoto = ''; // base64 of current form photo
+
+  // ── OPEN MAIN DAY MODAL (entry list) ──
+  function openModal(dayIndex) {
+    _currentDay  = dayIndex;
+    _editingId   = null;
+    _pendingPhoto = '';
+    renderDayModal();
+    openOverlay();
+  }
+
+  function renderDayModal() {
+    const i         = _currentDay;
+    const entries   = getDayEntries(i);
+    const date      = getDateForDay(i);
+    const today     = isToday(i);
+    const isBirthday = (i === BIRTHDAY_INDEX);
+    const modal     = document.getElementById('modal');
+    modal.className = 'modal' + (isBirthday ? ' birthday-modal' : '');
+
+    let entriesHtml = '';
+    if (entries.length === 0) {
+      entriesHtml = `<div class="no-entries-msg">No entries yet, Likhita! 🌸<br><span>Add your first memory below.</span></div>`;
+    } else {
+      entriesHtml = entries.map((e, idx) => `
+        <div class="entry-card" data-id="${e.id}">
+          ${e.photo ? `<img class="entry-thumb" src="${e.photo}" alt="thumb">` : `<div class="entry-thumb-placeholder">${ICONS[i]}</div>`}
+          <div class="entry-card-info">
+            ${e.label ? `<div class="entry-card-label">${escapeHtml(e.label)}</div>` : ''}
+            ${e.log   ? `<div class="entry-card-log">${escapeHtml(e.log.length > 60 ? e.log.substring(0,60)+'…' : e.log)}</div>` : ''}
+            <div class="entry-card-ts">${e.ts ? new Date(e.ts).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit'}) : ''}</div>
+          </div>
+          <div class="entry-card-actions">
+            <button class="entry-edit-btn" onclick="openEditForm('${e.id}')">✏️</button>
+            <button class="entry-del-btn"  onclick="deleteEntry('${e.id}')">🗑️</button>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    const birthdayBanner = isBirthday ? `
+      <div class="birthday-banner">
+        <div class="birthday-banner-emojis">🎉 🎂 🎊 🌸 👑 🌸 🎊 🎂 🎉</div>
+        <div class="birthday-banner-text">Happy 21st Birthday, Likhita!</div>
+        <div class="birthday-banner-sub">Today is the day — the grand finale of your 21 days of magic ✨</div>
+      </div>` : '';
+
+    modal.innerHTML = `
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-day-label">${isBirthday ? '🎂 The Big Day — April 10' : ICONS[i] + ' Day ' + (i + 1) + ' · Likhita\'s Memories'}</div>
+          <div class="modal-date-label">${isBirthday ? '🎉 Happy 21st Birthday!' : formatDate(date) + (today ? ' · Today 🌸' : '') + ' · ' + entries.length + ' entr' + (entries.length === 1 ? 'y' : 'ies')}</div>
+        </div>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body">
+        ${birthdayBanner}
+        <div class="entries-list" id="entriesList">${entriesHtml}</div>
+        <div class="add-entry-divider">
+          <span>✨ Add a new memory</span>
+        </div>
+        ${renderEntryForm(null)}
+        <div id="editFormArea"></div>
+      </div>
+    `;
+  }
+
+  function renderEntryForm(entryId) {
+    // entryId null = new form (always shown at bottom), non-null = edit (injected inline)
+    const entries = getDayEntries(_currentDay);
+    const e = entryId ? entries.find(x => x.id === entryId) : null;
+    const formId = entryId ? 'editForm_' + entryId : 'newEntryForm';
+    return `
+      <div class="entry-form" id="${formId}">
+        <div class="gift-label-area">
+          <label>🎀 Label / Gift Name</label>
+          <input type="text" class="gift-label-input" id="${formId}_label"
+            placeholder="e.g. Surprise bookstore trip…"
+            value="${escapeHtml(e?.label || '')}">
+        </div>
+        <div class="photo-area">
+          <label>📷 Memory Photo</label>
+          <div class="photo-preview-wrap ${e?.photo ? 'has-photo' : ''}"
+               id="${formId}_photoWrap"
+               onclick="document.getElementById('${formId}_photoInput').click()">
+            <img src="${e?.photo || ''}" id="${formId}_photoImg"
+                 alt="Memory" style="${e?.photo ? '' : 'display:none'}">
+            <div class="photo-placeholder"><span>🖼️</span><span>Click to add a photo</span></div>
+            <button class="photo-remove-btn" onclick="clearFormPhoto('${formId}', event)">✕</button>
+          </div>
+          <input type="file" class="photo-input" id="${formId}_photoInput" accept="image/*"
+                 onchange="handlePhotoChange('${formId}', this)">
+        </div>
+        <div class="log-area">
+          <label>📝 Your Note</label>
+          <textarea class="log-textarea" id="${formId}_log"
+            placeholder="What happened today, Likhita? How did this gift feel? ✨">${escapeHtml(e?.log || '')}</textarea>
+        </div>
+        <div class="form-actions-row">
+          <button class="save-btn" onclick="${entryId ? `saveEditEntry('${entryId}')` : 'saveNewEntry()'}">
+            ${entryId ? 'Update Memory 🌸' : 'Save Memory 🌸'}
+          </button>
+          ${entryId ? `<button class="cancel-edit-btn" onclick="cancelEdit('${entryId}')">Cancel</button>` : ''}
+        </div>
+      </div>
+    `;
+  }
+
+  function openEditForm(entryId) {
+    // Inject edit form right after the entry card
+    const card = document.querySelector(`.entry-card[data-id="${entryId}"]`);
+    if (!card) return;
+    // Remove any existing edit form
+    const existing = document.getElementById('editForm_' + entryId);
+    if (existing) { existing.remove(); return; }
+    const formHtml = renderEntryForm(entryId);
+    const wrapper = document.createElement('div');
+    wrapper.innerHTML = formHtml;
+    card.after(wrapper.firstElementChild);
+    wrapper.firstElementChild && wrapper.firstElementChild.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+
+  function cancelEdit(entryId) {
+    const form = document.getElementById('editForm_' + entryId);
+    if (form) form.remove();
+  }
+
+  function handlePhotoChange(formId, input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = ev => {
+      const wrap = document.getElementById(formId + '_photoWrap');
+      const img  = document.getElementById(formId + '_photoImg');
+      img.src = ev.target.result;
+      img.style.display = 'block';
+      wrap.classList.add('has-photo');
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function clearFormPhoto(formId, e) {
+    e.stopPropagation();
+    const wrap = document.getElementById(formId + '_photoWrap');
+    const img  = document.getElementById(formId + '_photoImg');
+    img.src = ''; img.style.display = 'none';
+    wrap.classList.remove('has-photo');
+    document.getElementById(formId + '_photoInput').value = '';
+  }
+
+  function getFormData(formId) {
+    const label = document.getElementById(formId + '_label').value.trim();
+    const log   = document.getElementById(formId + '_log').value.trim();
+    const img   = document.getElementById(formId + '_photoImg');
+    const photo = (img && img.style.display !== 'none' && img.src.startsWith('data:')) ? img.src : '';
+    return { label, log, photo };
+  }
+
+  // ── SUPABASE UPLOAD HELPER ──
+  async function uploadPhotoToCloud(formId) {
+    const input = document.getElementById(formId + '_photoInput');
+    const file = input.files[0];
+    if (!file) return null;
+    
+    // We return early if the image preview is empty (meaning they removed it)
+    const img = document.getElementById(formId + '_photoImg');
+    if (img && img.style.display === 'none') return null;
+    
+    const fileExt = file.name.split('.').pop();
+    const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
+    const filePath = `public/${fileName}`;
+
+    const { data, error } = await supabase.storage.from('images').upload(filePath, file);
+    if (error) {
+      console.error('Upload fail:', error);
+      throw error;
+    }
+    const { data: { publicUrl } } = supabase.storage.from('images').getPublicUrl(filePath);
+    return publicUrl;
+  }
+
+  // ── SAVE NEW ENTRY ──
+  async function saveNewEntry() {
+    const { label, log, photo } = getFormData('newEntryForm');
+    if (!label && !log && !photo) { showToast('Add something first, Likhita! 🌸'); return; }
+    
+    const btn = document.querySelector('#newEntryForm .save-btn');
+    const prevText = btn.textContent;
+    btn.textContent = 'Saving... ✨';
+    btn.disabled = true;
+    
+    try {
+      const publicUrl = await uploadPhotoToCloud('newEntryForm');
+      const newId = uid();
+      const ts = Date.now();
+      
+      const { error } = await supabase.from('entries').insert([
+        { id: newId, day_index: _currentDay, label, log, photo_url: publicUrl || photo, ts }
+      ]);
+      if (error) throw error;
+      
+      const store = getStore();
+      if (!store[_currentDay]) store[_currentDay] = [];
+      store[_currentDay].push({ id: newId, label, log, photo: publicUrl || photo, ts });
+      saveStore(store);
+      renderGrid();
+      renderDayModal();
+      showToast('Memory saved to cloud! 🌸');
+    } catch(e) {
+      showToast('Error saving: check console 🥺');
+      console.error(e);
+    } finally {
+      if(btn) { btn.textContent = prevText; btn.disabled = false; }
+    }
+  }
+
+  // ── SAVE EDITED ENTRY ──
+  async function saveEditEntry(entryId) {
+    const { label, log, photo } = getFormData('editForm_' + entryId);
+    
+    const btn = document.querySelector(`#editForm_${entryId} .save-btn`);
+    const prevText = btn.textContent;
+    btn.textContent = 'Updating... ✨';
+    btn.disabled = true;
+
+    try {
+      const publicUrl = await uploadPhotoToCloud('editForm_' + entryId);
+      const store = getStore();
+      const entries = store[_currentDay] || [];
+      const idx = entries.findIndex(e => e.id === entryId);
+      if (idx === -1) return;
+      
+      const oldPhoto = entries[idx].photo;
+      const img = document.getElementById('editForm_' + entryId + '_photoImg');
+      const isDeleted = img && img.style.display === 'none';
+      const finalPhoto = publicUrl || (isDeleted ? '' : photo || oldPhoto); // publicUrl if new file, '' if deleted, or existing
+      
+      const { error } = await supabase.from('entries')
+        .update({ label, log, photo_url: finalPhoto })
+        .eq('id', entryId);
+        
+      if (error) throw error;
+
+      entries[idx] = { ...entries[idx], label, log, photo: finalPhoto, ts: entries[idx].ts };
+      store[_currentDay] = entries;
+      saveStore(store);
+      renderGrid();
+      renderDayModal();
+      showToast('Updated in cloud! 🌸');
+    } catch(e) {
+      showToast('Error updating 🥺');
+      console.error(e);
+    } finally {
+      if(btn) { btn.textContent = prevText; btn.disabled = false; }
+    }
+  }
+
+  // ── DELETE ENTRY ──
+  async function deleteEntry(entryId) {
+    if (!confirm('Remove this memory from the cloud?')) return;
+    try {
+      showToast('Removing... 🍃');
+      const { error } = await supabase.from('entries').delete().eq('id', entryId);
+      if (error) throw error;
+      
+      const store = getStore();
+      store[_currentDay] = (store[_currentDay] || []).filter(e => e.id !== entryId);
+      if (store[_currentDay].length === 0) delete store[_currentDay];
+      saveStore(store);
+      renderGrid();
+      renderDayModal();
+      showToast('Removed from cloud 🍃');
+    } catch(e) {
+      showToast('Error removing 🥺');
+      console.error(e);
+    }
+  }
+
+  // ── FUTURE MODAL ──
+  function openFutureModal(dayIndex) {
+    const date  = getDateForDay(dayIndex);
+    const days  = daysUntil(dayIndex);
+    const modal = document.getElementById('modal');
+    modal.className = 'modal future-modal';
+    modal.innerHTML = `
+      <button class="modal-close" onclick="closeModal()" style="position:absolute;top:16px;right:16px;">✕</button>
+      <span class="future-icon">${ICONS[dayIndex]}</span>
+      <h2>Not yet, Likhita! 🎀</h2>
+      <p>Day ${dayIndex + 1} arrives on <strong>${formatDate(date)}</strong>.<br>This little surprise is still waiting for you!</p>
+      <div class="countdown">🌸 Opens in ${days} day${days !== 1 ? 's' : ''}</div>
+    `;
+    openOverlay();
+  }
+
+  function openOverlay() {
+    document.getElementById('modalOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal() {
+    document.getElementById('modalOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+    _currentDay = null; _editingId = null;
+  }
+
+  document.getElementById('modalOverlay').addEventListener('click', function(e) {
+    if (e.target === this) closeModal();
+  });
+
+  function showToast(msg) {
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2600);
+  }
+
+  initApp();
+</script>
+</body>
+</html>
