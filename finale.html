@@ -990,7 +990,6 @@
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // ── CONFIG ──
   const START_DATE = new Date('2026-03-21T00:00:00');
@@ -1035,6 +1034,7 @@
   function uid() {
     return Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
   }
+
 
   // ── DATE HELPERS ──
   function getDateForDay(i) {
@@ -1266,124 +1266,46 @@
     return { label, log, photo };
   }
 
-  // ── SUPABASE UPLOAD HELPER ──
-  async function uploadPhotoToCloud(formId) {
-    const input = document.getElementById(formId + '_photoInput');
-    const file = input.files[0];
-    if (!file) return null;
-    
-    // We return early if the image preview is empty (meaning they removed it)
-    const img = document.getElementById(formId + '_photoImg');
-    if (img && img.style.display === 'none') return null;
-    
-    const fileExt = file.name.split('.').pop();
-    const fileName = `${Date.now()}_${Math.random().toString(36).substring(2)}.${fileExt}`;
-    const filePath = `public/${fileName}`;
-
-    const { data, error } = await supabase.storage.from('images').upload(filePath, file);
-    if (error) {
-      console.error('Upload fail:', error);
-      throw error;
-    }
-    const { data: { publicUrl } } = supabase.storage.from('images').getPublicUrl(filePath);
-    return publicUrl;
-  }
-
   // ── SAVE NEW ENTRY ──
-  async function saveNewEntry() {
+  function saveNewEntry() {
     const { label, log, photo } = getFormData('newEntryForm');
     if (!label && !log && !photo) { showToast('Add something first, Likhita! 🌸'); return; }
-    
-    const btn = document.querySelector('#newEntryForm .save-btn');
-    const prevText = btn.textContent;
-    btn.textContent = 'Saving... ✨';
-    btn.disabled = true;
-    
-    try {
-      const publicUrl = await uploadPhotoToCloud('newEntryForm');
-      const newId = uid();
-      const ts = Date.now();
-      
-      const { error } = await supabase.from('entries').insert([
-        { id: newId, day_index: _currentDay, label, log, photo_url: publicUrl || photo, ts }
-      ]);
-      if (error) throw error;
-      
-      const store = getStore();
-      if (!store[_currentDay]) store[_currentDay] = [];
-      store[_currentDay].push({ id: newId, label, log, photo: publicUrl || photo, ts });
-      saveStore(store);
-      renderGrid();
-      renderDayModal();
-      showToast('Memory saved to cloud! 🌸');
-    } catch(e) {
-      showToast('Error saving: check console 🥺');
-      console.error(e);
-    } finally {
-      if(btn) { btn.textContent = prevText; btn.disabled = false; }
-    }
+    const store = getStore();
+    if (!store[_currentDay]) store[_currentDay] = [];
+    store[_currentDay].push({ id: uid(), label, log, photo, ts: Date.now() });
+    saveStore(store);
+    renderGrid();
+    renderDayModal();
+    showToast('Memory saved! 🌸');
   }
 
   // ── SAVE EDITED ENTRY ──
-  async function saveEditEntry(entryId) {
+  function saveEditEntry(entryId) {
     const { label, log, photo } = getFormData('editForm_' + entryId);
-    
-    const btn = document.querySelector(`#editForm_${entryId} .save-btn`);
-    const prevText = btn.textContent;
-    btn.textContent = 'Updating... ✨';
-    btn.disabled = true;
-
-    try {
-      const publicUrl = await uploadPhotoToCloud('editForm_' + entryId);
-      const store = getStore();
-      const entries = store[_currentDay] || [];
-      const idx = entries.findIndex(e => e.id === entryId);
-      if (idx === -1) return;
-      
-      const oldPhoto = entries[idx].photo;
-      const img = document.getElementById('editForm_' + entryId + '_photoImg');
-      const isDeleted = img && img.style.display === 'none';
-      const finalPhoto = publicUrl || (isDeleted ? '' : photo || oldPhoto); // publicUrl if new file, '' if deleted, or existing
-      
-      const { error } = await supabase.from('entries')
-        .update({ label, log, photo_url: finalPhoto })
-        .eq('id', entryId);
-        
-      if (error) throw error;
-
-      entries[idx] = { ...entries[idx], label, log, photo: finalPhoto, ts: entries[idx].ts };
-      store[_currentDay] = entries;
-      saveStore(store);
-      renderGrid();
-      renderDayModal();
-      showToast('Updated in cloud! 🌸');
-    } catch(e) {
-      showToast('Error updating 🥺');
-      console.error(e);
-    } finally {
-      if(btn) { btn.textContent = prevText; btn.disabled = false; }
-    }
+    const store = getStore();
+    const entries = store[_currentDay] || [];
+    const idx = entries.findIndex(e => e.id === entryId);
+    if (idx === -1) return;
+    // Keep old photo if no new one
+    const oldPhoto = entries[idx].photo;
+    entries[idx] = { ...entries[idx], label, log, photo: photo || oldPhoto, ts: entries[idx].ts };
+    store[_currentDay] = entries;
+    saveStore(store);
+    renderGrid();
+    renderDayModal();
+    showToast('Updated! 🌸');
   }
 
   // ── DELETE ENTRY ──
-  async function deleteEntry(entryId) {
-    if (!confirm('Remove this memory from the cloud?')) return;
-    try {
-      showToast('Removing... 🍃');
-      const { error } = await supabase.from('entries').delete().eq('id', entryId);
-      if (error) throw error;
-      
-      const store = getStore();
-      store[_currentDay] = (store[_currentDay] || []).filter(e => e.id !== entryId);
-      if (store[_currentDay].length === 0) delete store[_currentDay];
-      saveStore(store);
-      renderGrid();
-      renderDayModal();
-      showToast('Removed from cloud 🍃');
-    } catch(e) {
-      showToast('Error removing 🥺');
-      console.error(e);
-    }
+  function deleteEntry(entryId) {
+    if (!confirm('Remove this memory?')) return;
+    const store = getStore();
+    store[_currentDay] = (store[_currentDay] || []).filter(e => e.id !== entryId);
+    if (store[_currentDay].length === 0) delete store[_currentDay];
+    saveStore(store);
+    renderGrid();
+    renderDayModal();
+    showToast('Removed 🍃');
   }
 
   // ── FUTURE MODAL ──
@@ -1423,7 +1345,7 @@
     setTimeout(() => t.classList.remove('show'), 2600);
   }
 
-  initApp();
+  renderGrid();
 </script>
 </body>
 </html>
